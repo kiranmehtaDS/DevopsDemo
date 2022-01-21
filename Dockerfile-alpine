@@ -1,0 +1,21 @@
+FROM alpine
+RUN apk update
+RUN mkdir -p /run/apache2
+RUN apk add apache2
+COPY . /var/www/Localhost/htdocs
+ENV name Devops Dotsquares
+ENTRYPOINT exec /usr/sbin/httpd -D FOREGROUND
+
+
+FROM httpd:2.4
+COPY . /usr/Local/apache2/htdocs/
+
+
+
+FROM httpd:2.4-alpine
+COPY . /usr/Local/apache2/htdocs/
+
+FROM nginx:1.21.4-alpine
+WORKDIR /usr/share/nginx/html
+COPY . .
+ENV name DevOps Dotsquares
